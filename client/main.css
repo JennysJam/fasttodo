@@ -1,0 +1,20 @@
+html {
+    background-color: blanchedalmond;
+}
+
+body {
+    background-color: burlywood;
+    
+    width: 30rem;
+    min-width: 50%;
+    max-width: 80%;
+
+    min-height: 20rem;
+
+    margin: 0 auto;
+    margin-top: 1rem;
+    padding: 1rem;
+
+    border: 0 burlywood none;
+    border-radius: 2rem;
+}

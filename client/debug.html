@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+
+    <script defer>
+        //let S = null;
+        const $ = (query) => document.querySelector(query);
+        const $$ = (query) => document.querySelectorAll(query);
+
+        function setItems() {
+            // todo
+            //console.log(this.response);
+            const outType = $('#rsp-type');
+            const outCode = $("#rsp-code");
+            const outData = $('#rsp-data'); 
+            
+            outCode.textContent = String(this.status);
+            outType.textContent = String(this.responseType);
+            outData.textContent = String(this.responseText);
+            
+            alert("XHR finished");
+        }
+
+        function makeRequest(){
+            // get method
+            const outMethod = $('#rsp-method');
+            const outURL = $('#rsp-url');
+            const outBody = $('#rsp-body');
+
+            let form = $('#req-form');
+            let selector = $('#req-method');
+            //S = selector;
+            //alert(selector);
+            let reqmethod = selector.options[selector.selectedIndex].value;
+
+            let requri = $('#req-url').value;
+            if (requri === null || requri === '') 
+            {
+                alert('ignoring empty message');
+                return false;
+            }
+            let reqbody = $('#req-body').value;
+            form.reset();
+
+            alert(
+                `Evoke: ${reqmethod}  ${requri} ${reqbody}`
+            );
+
+            let xhr = new XMLHttpRequest();
+            
+            xhr.open(reqmethod, requri);
+            //xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.addEventListener('load', setItems);            
+            xhr.send(reqbody);
+
+            outMethod.textContent = String(reqmethod);
+            outURL.textContent = String(requri);
+            outBody.textContent = String(reqbody);
+
+            return false;
+        }
+    </script>
+
+</head>
+<!-- Debug Applicaiton Utility-->
+<body>
+    <h1>Debug Client</h1>
+    <form action="javascript:makeRequest()" id="req-form">
+        <select name="method" id="req-method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="DELETE">DELETE</option>
+            <option value="PUT">PUT</option>
+        </select>
+        <input type="text" id="req-url" required>
+        <textarea name="req-body" id="req-body" cols="30" rows="10"></textarea>
+        <input type="button" value="Submit" id="btnsubmit" onclick="makeRequest()">
+    </form>
+
+    <dl>
+        <dt>Request Method</dt>
+        <dd id="rsp-method">...</dd>
+
+        <dt>Request URL</dt>
+        <dd id="rsp-url">...</dd>
+
+        <dt>Request Body</dt>
+        <dd id="rsp-body">...</dd>
+
+        <dt>Response Result</dt>
+        <dd id="rsp-code">...</dd>
+
+        <dt>Response Type</dt>
+        <dd id="rsp-type">...</dd>
+
+        <dt>Response Data</dt>
+        <dd id="rsp-data">...</dd>
+    </dl>
+
+</body>
+</html>
