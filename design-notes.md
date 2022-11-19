@@ -74,6 +74,15 @@ generally using json for marshalling. has top level of api
 - *PUT* `/api/todo/{ident}/field`  
     Use this to update item values (description, name, string, datetime, urgency, etc,) in place. A value of `null` will be used to set unset it.
 
+## updated api
+
+parent nodes should be passed as path parameters and creation requests should have a simple body (called TaskReq i think), so
+
+- `PUT /api/task`  
+    Create new task (toplevel)
+- `PUT /api/task/{ident}`
+    Create new task with parent as ident
+
 
 ## Client
 Client will be a simple 1 page app that takes in data and appends values, which will be a little tree of divs most likely (or articles, semantically?). I think name/description should be shown and notes could be collapsable/scrollable.

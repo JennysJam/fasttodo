@@ -23,7 +23,7 @@
             outType.textContent = String(this.responseType);
             outData.textContent = String(this.responseText);
             
-            alert("XHR finished");
+            //alert("XHR finished");
         }
 
         function makeRequest(){
@@ -41,21 +41,22 @@
             let requri = $('#req-url').value;
             if (requri === null || requri === '') 
             {
-                alert('ignoring empty message');
+                //alert('ignoring empty message');
                 return false;
             }
             let reqbody = $('#req-body').value;
             form.reset();
 
-            alert(
-                `Evoke: ${reqmethod}  ${requri} ${reqbody}`
-            );
+            // alert(
+            //     `Evoke: ${reqmethod}  ${requri} ${reqbody}`
+            // );
 
             let xhr = new XMLHttpRequest();
             
             xhr.open(reqmethod, requri);
             //xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.addEventListener('load', setItems);            
+            xhr.addEventListener('load', setItems);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");         
             xhr.send(reqbody);
 
             outMethod.textContent = String(reqmethod);
