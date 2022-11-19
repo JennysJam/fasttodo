@@ -3,7 +3,7 @@ Server backend for Task app
 """
 from task import Task, TaskApp, TaskReq, Id
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -62,5 +62,5 @@ async def post_task_parent(ident: Id, body: TaskReq) -> Id:
 
 @server.delete('/api/task/{ident}')
 async def delete_task(ident: Id) -> List[Id]:
-    pass
+    raise HTTPException( status_code=501, detail='Task Deletion Not Yet Supported' )
 
